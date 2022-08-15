@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-size: 22px;
     color: white;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -13,22 +14,61 @@ body {
     height: 100vh;
 }
 
+input {
+    border-radius: 10px;
+    outline: none;
+    padding: 8px;
+    color: black;
+    margin: 10px 0;
+}
+
+button {
+    color: black;
+    padding: 8px;
+    border-radius: 10px;
+    position: relative;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 .container {
     /* background: linear-gradient(to right,#3a7bd5,#3a6073); */
     background-color: #404040;
     text-align: center;
-    width: 350px;
-    padding: 15px 0 15px;
+    width: 500px;
+    padding: 15px;
     box-shadow:  0 0 1px black;
     border-radius: 20px;
 }
 
+.info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin-left: 30px;
+    font-size: 25px;
+}
+
 .city_name {
-    font-size: 32px;
+    font-size: 36px;
+    margin: 10px;
+}
+
+.city_temperture {
+    display: flex;
 }
 
 .temperture {
-    font-size: 32px;
+    font-size: 50px;
     display: inline-block;
 }
 
@@ -36,10 +76,6 @@ body {
     font-size: 30px;
 }
 
-.weather_name {
-    font-size: 35px;
-    margin: 15px 0;
-}
 
 .weather_detail {
     border-top: 1px solid white;
