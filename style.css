@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #000000;
+    background-color: #48868c;
     display: grid;
     place-items: center;
     height: 100vh;
@@ -35,7 +35,8 @@ button:hover {
 }
 
 .container {
-    /* background: linear-gradient(to right,#3a7bd5,#3a6073); */
+    background: linear-gradient(to right, rgba(50, 80, 77, 0.4), rgba(20, 100, 150, 0.4)), url('https://images.unsplash.com/photo-1514477917009-389c76a86b68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGluayUyMHNreXxlbnwwfHwwfHw%3D&w=1000&q=80');
+    background-position: center;
     background-color: #404040;
     text-align: center;
     width: 700px;
@@ -95,7 +96,6 @@ button:hover {
     width: 155px;
     height: 135px;
     border-radius: 10px;
-    /* background-color: aquamarine; */
 }
 
 .weather_content {
@@ -114,5 +114,8 @@ button:hover {
 
 .temp_max , .temp_min {
     font-size: 18px;
-    
+}
+
+.hide {
+    display: none;
 }

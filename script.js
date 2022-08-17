@@ -1,3 +1,8 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable no-undef */
+/* eslint-disable prefer-template */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable indent */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable prefer-const */
@@ -12,6 +17,9 @@ const mutipleImages = document.querySelectorAll('.icon');
 const input = document.querySelector('.input');
 const submitBtn = document.querySelector('.submit');
 const reader = new FileReader();
+
+const hideDivs = document.querySelectorAll('.hide');
+const weatherDate = document.querySelectorAll('.weather_date');
 const tempMax = document.querySelectorAll('.temp_max');
 const tempMin = document.querySelectorAll('.temp_min');
 let numberOfImage = 0;
@@ -27,34 +35,33 @@ reader.onloadend = () => {
   numberOfImage++;
 };
 
-function convertTime(milliseconds) {
-  let unix_timestamp = milliseconds;
-  let date = new Date(unix_timestamp * 1000);
-  console.log(date.toLocaleDateString('en-GB'));
+function disableHide() {
+  hideDivs.forEach(ele => {
+    ele.classList.remove('hide');
+  });
 }
 
 function showCurrentDate(data) {
+  disableHide();
   const arr = data.list;
-  let i = 0;
-  const { humidity, temp, feels_like } = arr[i].main;
-  cityName.textContent = arr[i].name;
+  const { humidity, temp, feels_like } = arr[0].main;
+  cityName.textContent = data.city.name;
+  cityWind.textContent = arr[0].wind.speed;
+  weatherName.textContent = arr[0].weather[0].main;
   cityTemperture.innerText = temp + '°C';
   cityHumidity.textContent = humidity;
-  cityWind.textContent = arr[i].wind.speed;
-  weatherName.textContent = arr[i].weather[0].main;
-  feelLike.textContent = feels_like;
+  feelLike.textContent = 'Feel like ' + feels_like + '°';
 }
 
 function showNextFewDays(data) {
-  console.log(data);
   const arr = data.list;
-  let j = 0;
+  let j = 8;
   for (let i = 0; i < tempMax.length; i++) {
-    const { temp_min, temp_max} = arr[j].main;
-    console.log(arr[j]);
-    tempMax[i].textContent = temp_max;
-    tempMin[i].textContent = temp_min;
-    j += 12;
+    const { temp_min, temp_max } = arr[j].main;
+    weatherDate[i].textContent = moment.unix(arr[j].dt).format('DD/MM/YY');
+    tempMax[i].textContent = temp_max + '°';
+    tempMin[i].textContent = temp_min + '°';
+    j += 8;
   }
 }
 
@@ -65,7 +72,6 @@ async function setImages(data) {
     const respone = await fetch(`https://openweathermap.org/img/wn/${arr[j].weather[0].icon}@2x.png`);
     const imageBlob = await respone.blob();
     reader.readAsDataURL(imageBlob);
-    // mutipleImages[j].setAttribute('src', imageObjectURL);
     j += 9;
   }
 }
