@@ -119,3 +119,8 @@ button:hover {
 .hide {
     display: none;
 }
+
+.air_polution {
+    border-radius: 10px;
+    padding: 5px;
+}
