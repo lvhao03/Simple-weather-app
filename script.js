@@ -10,6 +10,8 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
+const container = document.querySelector('.container');
+console.log(container);
 const cityName = document.querySelector('.city_name');
 const cityTemperture = document.querySelector('.temperture');
 const cityHumidity = document.querySelector('.humidlity');
@@ -46,10 +48,11 @@ function disableHide() {
 }
 
 function showCurrentDate(data, airPolutionData) {
-  checkAirQuality(airPolutionData.list[0].main.aqi);
-  disableHide();
   const arr = data.list;
   const { humidity, temp, feels_like } = arr[0].main;
+  checkAirQuality(airPolutionData.list[0].main.aqi);
+  checkWeather(arr[0].weather[0].main);
+  disableHide();
   cityName.textContent = data.city.name;
   cityWind.textContent = arr[0].wind.speed;
   weatherName.textContent = arr[0].weather[0].main;
@@ -68,6 +71,22 @@ function showNextFewDays(data) {
     tempMin[i].textContent = temp_min + '°';
     groupHoursPerDay += 8;
   }
+}
+
+function checkWeather(data) {
+  const weather = data.toLowerCase();
+  switch (weather) {
+    case 'rain':
+        return changeBackgroundColor(0);
+    case 'clouds':
+        return changeBackgroundColor(1);
+  }
+}
+
+function changeBackgroundColor(index) {
+  const linearGradientColor = 'linear-gradient(to right, rgba(50, 80, 77, 0.2), rgba(20, 100, 150, 0.2))';
+  const backGroundColors = ['https://r1.ilikewallpaper.net/ipad-air-wallpapers/download/37694/Close-up-drop-black-blue-rain-ipad-air-wallpaper-ilikewallpaper_com.jpg', 'https://images.unsplash.com/photo-1514477917009-389c76a86b68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGluayUyMHNreXxlbnwwfHwwfHw%3D&w=1000&q=80'];
+  container.style.background = `${linearGradientColor}, url(${backGroundColors[index]})`;
 }
 
 function checkAirQuality(index) {
